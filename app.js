@@ -15,7 +15,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
 var currentArtist;
 var trackName;
 
-var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
+var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
   $scope.audioObject = {}
 
   // get songs by artist search
@@ -66,6 +66,13 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     }
   }
 
+  // $uibModal.open({
+  //   animation: true,
+  //   controller: 'myCtrl',
+  //   templateUrl: 'templates/myModalContent.html',
+  //   size: 'lg',
+  // });
+
   // Unhides, the popup, and then appends information to it - including Instagram pictures
   $scope.popup = function(track) {
     $('#popup, .overlay').show();
@@ -73,7 +80,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     // clear the popup, then append information
     $('#popup').html("");
     $('#popup').append("<img class='popupAlbum' src=" + track.album.images[0].url + " alt=" + track.name + ">");
-    $('#popup').append('<h4>"' + track.name + '" by ' + track.artists[0].name + "</h4>")
+    $('#popup').append('<h4>"' + track.name + '" by ' + track.artists[0].name + '</h4>')
     $('#popup').append("<h4>" + "from the album <i>" + track.album.name + "</i></h4>")
     $('#popup').append("<hr>")
     $('#popup').append("<img id='instaIcon' src='img/Instagram.png'><span> Displaying recent Instagram photos tagged with #" + track.name.replace(/\s+/g, "").replace("-", "").replace("'", "") + ":</span><br>")
@@ -115,3 +122,4 @@ $('body').tooltip({
     selector: '[title]',
 });
 
+// https://angular-ui.github.io/bootstrap/

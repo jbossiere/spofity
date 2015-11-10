@@ -92,9 +92,7 @@
 			
 			<!-- Create the popup window -->
 			<div class="overlay"></div>
-			<div id="popup">
-				<div class="instaResult"></div>
-			</div>
+			<div id="popup"></div>
 
 			<!-- Results -->
 			<div class="container-fixed">
@@ -104,7 +102,7 @@
 						<span class="playingSpan" ng-show="currentSong && !audioObject.paused">(Currently playing: {{trackName}})</span>
 					</div>
 					<div id="selectImages">
-						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); popup(track)">
+						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); popup(track)"> <!--open() -->
 							<img uib-tooltip="{{track.name}}" class="image" src="{{track.album.images[1].url}}" alt="{{track.name}}" title="{{track.name}}" data-toggle="tooltip">
 						</div>
 					</div>			
