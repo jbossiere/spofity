@@ -7,8 +7,6 @@ $(document).ready(function(){
     $('#popup, .overlay').hide();
   });
 
-  $('.playingSpan').tooltip({title: "Hooray"}); 
-
 });
 
 var data;
