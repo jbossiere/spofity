@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Spofity</title>
+		<link rel="page icon" href="img/logo.png">
+		
+		<!-- Include libraries -->
+		<script src="https://code.jquery.com/jquery.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+		
+		<!-- Read scripts -->
+		<script src="app.js"></script>
+		<link href="app.css" type="text/css" rel="stylesheet"/>	
+		
+	</head>
+	<body>
+		<!-- Where the header goes and where the logo goes -->
+		<header>
+			<div class="container">
+				<img id="headerImg" src="img/Spofity-logo.png">
+			</div>
+		</header>
+
+		<!-- Initiate app -->
+		<div class="container" ng-app="myApp" ng-controller="myCtrl">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- Artist Form -->
+					<form class="container col-xs-12 col-md-12" name="artistForm" novalidate>
+
+						<!-- Artist Search -->
+						<div class="form-group" ng-class="{'has-error':artistForm.searchArt.$error.touched && artistForm.searchArt.$invalid}">
+							<input name="searchArt" placeholder="Search an Artist..." ng-model="artist" ng-minlength="2" class="form-control" autocomplete="off" required></input>
+							<p ng-show="artistForm.searchArt.$error.minlength" class="help-block">Search item is too short</p>
+						</div>
+
+						<!-- Artist submit button -->
+						<div class="form-group">
+							<button ng-disabled="artistForm.searchArt.$invalid" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
+						</div>
+					</form>
+				</div> <!-- /row -->
+			</div> <!-- /container -->
+
+			<!-- Song Filter -->
+			<div id="filterBar" class="container-fluid">
+				<!-- button that allows user to pause music whenever - only appears when hidden filter bars appear -->
+				<button class="btn btn-warning" type="submit" ng-click="pause()">Pause Music</button>
+
+				<div class="row">
+
+					<!-- Song Form -->
+					<form class="container col-xs-12 col-sm-6" name="songForm" novalidate>
+
+						<!-- Song Filter Search -->
+						<div class="form-group">
+							<label>Filter by song:</label>
+							<input name="searchSong" placeholder="Hit enter to search..." ng-model="track" class="form-control" autocomplete="off" required></input>
+						</div>
+
+						<!-- song filter submit button -->
+						<div class="form-group">
+							<button class="btn btn-primary invisible" ng-click="getSongs()" type="submit">Submit</button>
+						</div>
+					</form>
+					<!-- /Song Form -->
+
+					<!-- Album Filter -->
+					<form class="container col-xs-12 col-sm-6" name="albumForm" novalidate>
+						<!-- Album Filter Search -->
+						<div class="form-group">
+							<label>Filter by album:</label>
+							<input name="searchAlb" placeholder="Hit enter to search..." ng-model="album" class="form-control" autocomplete="off" required></input>
+						</div>
+
+						<!-- album filter submit button -->
+						<div class="form-group">
+							<button class="btn btn-primary invisible" ng-click="getSongs()" type="submit">Submit</button>
+						</div>
+					</form>
+					<!-- /Album Filter -->
+
+				</div>
+			</div>
+			<!-- /Song Filter -->
+			
+			<!-- Create the popup window -->
+			<div class="overlay"></div>
+			<div id="popup">
+				<div class="instaResult"></div>
+			</div>
+
+			<!-- Results -->
+			<div class="container-fixed">
+				<div class="row">
+					<div class="help-block">
+						<span class="playingSpan" ng-show="tracks.length>0">Click for more info and preview:</span>
+						<span class="playingSpan" ng-show="currentSong && !audioObject.paused">(Currently playing: {{trackName}})</span>
+					</div>
+					<div id="selectImages">
+						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); popup(track)">
+							<img class="image" src="{{track.album.images[1].url}}" alt="{{track.name}}" title="{{track.name}}" data-toggle="tooltip">
+						</div>
+					</div>			
+				</div> 
+			</div>
+			<!-- /Results -->
+		</div> 
+		<!-- /Initiate App -->
+
+	</body>
+</html>
+
