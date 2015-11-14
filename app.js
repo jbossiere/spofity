@@ -65,17 +65,29 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
     }
   };
 
+  // Pauses the music when the pause button is clicked if the music is playing
+  $scope.pause = function() {
+    if(!$scope.audioObject.paused) {
+      $scope.audioObject.pause();
+      $scope.currentSong = false;
+      return;
+    }
+  };
+
   // open the modal
-  $scope.open = function(track) {
-    $scope.trackName = track.name;
+  $scope.open = function(currentTrack) {
+    $scope.trackName = currentTrack.name;
     $uibModal.open({
       animation: true,
       controller: 'modalCtrl',
       templateUrl: 'templates/myModalContent.html',
-      size: 'lg',
+      size: 'md',
       resolve: {
         currentTrack: function () {
-          return $scope.currentTrack = track;
+          return currentTrack;
+        },
+        currentAudio: function () {
+          return $scope.audioObject;
         }
       }
     });
@@ -98,7 +110,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
 
 
 // A controller to return the current track info to myModalContent.html
-var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, currentTrack) {
+var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, currentTrack, currentAudio) {
   $scope.currentTrack = currentTrack;
   var hashtag = $scope.hashtag = currentTrack.name.replace(/\s+/g, "").replace("-", "").replace("'", "");
   var beginUrl = "https://api.instagram.com/v1/tags/";
@@ -113,16 +125,14 @@ var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal,
         'Content-type': 'application/jsonp'
     }
   }).success(function(response) {
-      console.log(response);
-      $scope.instaImg = response;
-    });
+    console.log('check1');
+    $scope.instaImg = response;
+  });
 
   // Pauses the music when the pause button is clicked if the music is playing
   $scope.pause = function() {
-    console.log('pause')
-    if(!$scope.audioObject.paused) {
-      $scope.audioObject.pause();
-      $scope.currentSong = false;
+    if(!currentAudio.paused) {
+      currentAudio.pause();
       return;
     }
   };

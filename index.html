@@ -50,6 +50,8 @@
 
 			<!-- Song Filter -->
 			<div id="filterBar" class="container-fluid">
+				<!--Pause Music-->
+				<button class="btn btn-warning fixedBtn" type="button" ng-click="pause()">Pause Music</button>
 				<div class="row">
 
 					<!-- Song Form -->
@@ -87,16 +89,12 @@
 			</div>
 			<!-- /Song Filter -->
 			
-			<!-- Create the popup window -->
-			<!-- <div class="overlay"></div>
-			<div id="popup"></div> -->
-
 			<!-- Results -->
 			<div class="container-fixed">
 				<div class="row">
 					<div class="help-block">
 						<span class="playingSpan" ng-show="tracks.length>0">Click for more info and preview:</span>
-						<span class="playingSpan" ng-show="currentSong && !audioObject.paused">(Currently playing: {{trackName}})</span>
+						<span class="playingSpan" ng-show="currentSong &&!audioObject.paused">(Currently playing: {{trackName}})</span> <!-- took out currentSong && from ng-show... is it necessary?-->
 					</div>
 					<div id="selectImages">
 						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); open(track)"> <!--open(track) -->

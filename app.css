@@ -88,7 +88,7 @@ the popup in order to make it a background*/
 }
 
 /*positions the pause music button in bottom right of screen*/
-.btn-warning {
+.fixedBtn {
 	position: fixed;
 	z-index: 101;
 	right: 2%;
@@ -97,13 +97,12 @@ the popup in order to make it a background*/
 
 /*positions the album art image in the popup*/
 img.popupAlbum {
-	padding-top: 20px;
-	width: 450px;
-	height: 450px;
+	width: 80%;
+	height: 80%;
 }
 
 /*positions the line in the popup*/
-#popup hr {
+.modal-body hr {
 	width: 50%;
 	margin-bottom: 8px;
 }
@@ -131,8 +130,8 @@ li.instaResultList {
 	img.popupAlbum {
 		margin-left: auto;
 		margin-right: auto;
-		width: 290px;
-		height: 290px;
+		width: 80%;
+		height: 80%;
 	}
 
 	img.instaImage {
