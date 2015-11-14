@@ -1,22 +1,22 @@
 $(document).ready(function(){
   $('#filterBar').hide(); // start with filter bars hidden
-  $('#popup, .overlay').hide(); //start with popup hidden
+  // $('#popup, .overlay').hide(); //start with popup hidden
 
-  // hide popup if the popup is clicked
-  $('#popup, .overlay').click(function() {
-    $('#popup, .overlay').hide();
-  });
+  // // hide popup if the popup is clicked
+  // $('#popup, .overlay').click(function() {
+  //   $('#popup, .overlay').hide();
+  // });
 
 });
 
 var data;
 var baseUrl = 'https://api.spotify.com/v1/search?type=track&query=artist:'
-var myApp = angular.module('myApp', ['ui.bootstrap']);
 var currentArtist;
 var trackName;
+var myApp = angular.module('myApp', ['ui.bootstrap']);
 
-var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
-  $scope.audioObject = {}
+var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) { 
+  $scope.audioObject = {};
 
   // get songs by artist search
   $scope.getSongs = function() {
@@ -62,64 +62,69 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
       $scope.audioObject = new Audio(song);
       $scope.audioObject.play();   
       $scope.currentSong = song; 
-
     }
-  }
+  };
 
-  // $uibModal.open({
-  //   animation: true,
-  //   controller: 'myCtrl',
-  //   templateUrl: 'templates/myModalContent.html',
-  //   size: 'lg',
-  // });
-
-  // Unhides, the popup, and then appends information to it - including Instagram pictures
-  $scope.popup = function(track) {
-    $('#popup, .overlay').show();
+  // open the modal
+  $scope.open = function(track) {
     $scope.trackName = track.name;
-    // clear the popup, then append information
-    $('#popup').html("");
-    $('#popup').append("<img class='popupAlbum' src=" + track.album.images[0].url + " alt=" + track.name + ">");
-    $('#popup').append('<h4>"' + track.name + '" by ' + track.artists[0].name + '</h4>')
-    $('#popup').append("<h4>" + "from the album <i>" + track.album.name + "</i></h4>")
-    $('#popup').append("<hr>")
-    $('#popup').append("<img id='instaIcon' src='img/Instagram.png'><span> Displaying recent Instagram photos tagged with #" + track.name.replace(/\s+/g, "").replace("-", "").replace("'", "") + ":</span><br>")
-
-    // Note to the grader: currently i have it returning instagram photos with the track name hashtag because I believe this shows off 
-    // the page a little bit better by showing different photo results for different clicked songs, but I do prefer to have it return
-    // photos with the artist name hashtag because it's more likely to return relelvant photos (ex. #coldplay will most likely return 
-    // photos with coldplay in it, while #yellow, as in Coldplay's song Yellow will return a bunch of random photos)
-
-    // Also warning that there is no way to filter out NSFW photos so occassionally you may get some...
-
-
-    // use the instagram API to get relevant tagged photos, then add the 10 most recent photos to the instagram div in the popup
-    $.ajax({
-      type: "GET",
-      dataType: "jsonp",
-      cache: false,
-      url: "https://api.instagram.com/v1/tags/" + track.name.replace(/\s+/g, "").replace("-", "").replace("'", "") + "/media/recent?access_token=211968027.7222298.1bbdffa25f78459ba915b03b6780eefb",
-      success: function(data){
-        for (var i=0; i<10; i++) {
-          $('#popup').append("<li class='instaResultList'><img class='instaImage' src='" + data.data[i].images.low_resolution.url + "'></li>");
+    $uibModal.open({
+      animation: true,
+      controller: 'modalCtrl',
+      templateUrl: 'templates/myModalContent.html',
+      size: 'lg',
+      resolve: {
+        currentTrack: function () {
+          return $scope.currentTrack = track;
         }
       }
     });
-  }
+  };
+});
+  //   // use the instagram API to get relevant tagged photos, then add the 10 most recent photos to the instagram div in the popup
+  //   $.ajax({
+  //     type: "GET",
+  //     dataType: "jsonp",
+  //     cache: false,
+  //     url: "https://api.instagram.com/v1/tags/" + track.name.replace(/\s+/g, "").replace("-", "").replace("'", "") + "/media/recent?access_token=211968027.7222298.1bbdffa25f78459ba915b03b6780eefb",
+  //     success: function(data){
+  //       for (var i=0; i<10; i++) {
+  //         $('#popup').append("<li class='instaResultList'><img class='instaImage' src='" + data.data[i].images.low_resolution.url + "'></li>");
+  //       }
+  //     }
+  //   });
+  // }
+
+
+
+// A controller to return the current track info to myModalContent.html
+var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, currentTrack) {
+  $scope.currentTrack = currentTrack;
+  var hashtag = $scope.hashtag = currentTrack.name.replace(/\s+/g, "").replace("-", "").replace("'", "");
+  var beginUrl = "https://api.instagram.com/v1/tags/";
+  var endUrl = "/media/recent?access_token=211968027.7222298.1bbdffa25f78459ba915b03b6780eefb";
+
+  // Get the instagram photos
+  $http({
+    method: 'GET',
+    url: beginUrl + hashtag + endUrl,
+    cache: false,
+    headers: {
+        'Content-type': 'application/jsonp'
+    }
+  }).success(function(response) {
+      console.log(response);
+      $scope.instaImg = response;
+    });
 
   // Pauses the music when the pause button is clicked if the music is playing
   $scope.pause = function() {
+    console.log('pause')
     if(!$scope.audioObject.paused) {
       $scope.audioObject.pause();
       $scope.currentSong = false;
       return;
     }
-  }
+  };
 });
 
-// Add tool tips to anything with a title property
-$('body').tooltip({
-    selector: '[title]',
-});
-
-// https://angular-ui.github.io/bootstrap/

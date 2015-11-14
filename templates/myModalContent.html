@@ -1,3 +1,20 @@
 <!-- myModalContent.html -->
-<img class='popupAlbum' src='{{track.album.images[0].url}}' alt="{{track.name}}">
-<h4>{{track.name}} by {{track.artists[0].name}}</h4>
+<div class="modal-header">
+	<h3 class="modal-title">{{currentTrack.name}}</h3>
+</div>
+<div class="modal-body">
+	<img class='popupAlbum' src='{{currentTrack.album.images[1].url}}' alt="{{currentTrack.name}}">
+	<h4>"{{currentTrack.name}}" by {{currentTrack.artists[0].name}}</h4>
+	<h4>from the album <i>{{currentTrack.album.name}}</i></h4>
+	<hr>
+	<img id='instaIcon' src='img/Instagram.png'>
+	<span> Displaying recent Instagram photos tagged with #{{hashtag}}:</span><br>
+	<li class='instaResultList'>
+		<img class='instaImage' src='{{instaImg.data[i].images.low_resolution.url}}'>
+	</li>
+</div>
+
+<div class="modal-footer">
+	<!--Pause Music-->
+	<button class="btn btn-warning" type="button" ng-click="pause()">Pause Music</button>
+</div>

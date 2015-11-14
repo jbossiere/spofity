@@ -11,8 +11,8 @@
 		<script src="https://code.jquery.com/jquery.min.js"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
 		
 		<!-- Read scripts -->
 		<script src="app.js"></script>
@@ -50,9 +50,6 @@
 
 			<!-- Song Filter -->
 			<div id="filterBar" class="container-fluid">
-				<!-- button that allows user to pause music whenever - only appears when hidden filter bars appear -->
-				<button class="btn btn-warning" type="submit" ng-click="pause()">Pause Music</button>
-
 				<div class="row">
 
 					<!-- Song Form -->
@@ -91,8 +88,8 @@
 			<!-- /Song Filter -->
 			
 			<!-- Create the popup window -->
-			<div class="overlay"></div>
-			<div id="popup"></div>
+			<!-- <div class="overlay"></div>
+			<div id="popup"></div> -->
 
 			<!-- Results -->
 			<div class="container-fixed">
@@ -102,8 +99,8 @@
 						<span class="playingSpan" ng-show="currentSong && !audioObject.paused">(Currently playing: {{trackName}})</span>
 					</div>
 					<div id="selectImages">
-						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); popup(track)"> <!--open() -->
-							<img uib-tooltip="{{track.name}}" class="image" src="{{track.album.images[1].url}}" alt="{{track.name}}" title="{{track.name}}" data-toggle="tooltip">
+						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); open(track)"> <!--open(track) -->
+							<img uib-tooltip="{{track.name}}" class="image" src="{{track.album.images[1].url}}" alt="{{track.name}}" data-toggle="tooltip">
 						</div>
 					</div>			
 				</div> 
