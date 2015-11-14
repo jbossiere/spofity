@@ -93,40 +93,21 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
     });
   };
 });
-  //   // use the instagram API to get relevant tagged photos, then add the 10 most recent photos to the instagram div in the popup
-  //   $.ajax({
-  //     type: "GET",
-  //     dataType: "jsonp",
-  //     cache: false,
-  //     url: "https://api.instagram.com/v1/tags/" + track.name.replace(/\s+/g, "").replace("-", "").replace("'", "") + "/media/recent?access_token=211968027.7222298.1bbdffa25f78459ba915b03b6780eefb",
-  //     success: function(data){
-  //       for (var i=0; i<10; i++) {
-  //         $('#popup').append("<li class='instaResultList'><img class='instaImage' src='" + data.data[i].images.low_resolution.url + "'></li>");
-  //       }
-  //     }
-  //   });
-  // }
-
 
 
 // A controller to return the current track info to myModalContent.html
 var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, currentTrack, currentAudio) {
   $scope.currentTrack = currentTrack;
-  var hashtag = $scope.hashtag = currentTrack.name.replace(/\s+/g, "").replace("-", "").replace("'", "");
+  var hashtag = $scope.hashtag = currentTrack.name.replace(/\s+/g, "").replace("-", "").replace("'", "").replace(",", "");
   var beginUrl = "https://api.instagram.com/v1/tags/";
-  var endUrl = "/media/recent?access_token=211968027.7222298.1bbdffa25f78459ba915b03b6780eefb";
+  var endUrl = "/media/recent?access_token=11438424.81f9925.4562fc090a894cc695e36976c7c31efa&callback=JSON_CALLBACK";
+  console.log(beginUrl + hashtag + endUrl);
 
   // Get the instagram photos
-  $http({
-    method: 'GET',
-    url: beginUrl + hashtag + endUrl,
-    cache: false,
-    headers: {
-        'Content-type': 'application/jsonp'
+  $http.jsonp(beginUrl + hashtag + endUrl).success(function(response){
+    if (response.data.length != 0) {
+      $scope.instaImg = response.data;
     }
-  }).success(function(response) {
-    console.log('check1');
-    $scope.instaImg = response;
   });
 
   // Pauses the music when the pause button is clicked if the music is playing

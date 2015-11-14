@@ -48,36 +48,6 @@ div.help-block {
 	padding: 1%;
 }
 
-/*positions backdrop, and gives it a box-shadow*/
-#popup {
-	box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5); /*h-shadow, v-shadow, blur, color*/
-	position: fixed;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	top: 10%;
-	z-index: 100;
-	background-color: #434343;
-	color: #AEAEAE;
-	width: 80%;
-	height: 80%;
-	text-align: center;
-	overflow: auto;
-}
-
-/*darkens opaque backdrop for the popup to focus user's attention, set z-index to one below
-the popup in order to make it a background*/
-.overlay { 
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color: #AEAEAE;
-    opacity:0.8;
-    z-index:99;
-}
-
 /*positions the selecteImages div where each result div/image shows up*/
 #selectImages {
 	padding: 1%;
@@ -111,19 +81,15 @@ img.popupAlbum {
 #instaIcon {
 	width: 25px;
 	height: 25px;
-	margin-bottom: 15px;
 }
 
-/*padding on the image results from instagram*/
+
+/*padding and positioning on the image results from instagram*/
 img.instaImage {
-	width: 300px;
-	padding: 5px;
+	width: 200px;
+	border: solid 1px;
 }
 
-/*changes how the list of instagram result pics is displayed*/
-li.instaResultList {
-	display: inline;
-}
 
 /*When the screen is smaller than 768px (for smartphones), change the image sizes of the popups*/
 @media screen and (max-width: 768px) {
@@ -137,9 +103,9 @@ li.instaResultList {
 	img.instaImage {
 		width:200px;
 	}
+}
 
-	h4 {
-		margin-left: auto;
-		margin-right: auto; 
-	}
+/*aligns the additional info in the modal*/
+.additionalInfo {
+	text-align: center;
 }

@@ -1,18 +1,17 @@
 <!-- myModalContent.html -->
 <div class="modal-header">
-	<h3 class="modal-title">{{currentTrack.name}}</h3>
+	<h3 class="modal-title additionalInfo">{{currentTrack.name}}</h3>
 </div>
-<div class="modal-body">
-	<img class='popupAlbum' src='{{currentTrack.album.images[1].url}}' alt="{{currentTrack.name}}">
-	<h4>"{{currentTrack.name}}" by {{currentTrack.artists[0].name}}</h4>
-	<h4>from the album <i>{{currentTrack.album.name}}</i></h4>
-	<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+<div class="modal-body center-block">
+	<img class='popupAlbum center-block' src='{{currentTrack.album.images[1].url}}' alt="{{currentTrack.name}}">
+	<h4 class="additionalInfo">"{{currentTrack.name}}" by {{currentTrack.artists[0].name}}</h4>
+	<h4 class="additionalInfo">from the album <i>{{currentTrack.album.name}}</i></h4>
 	<hr>
-	<img id='instaIcon' src='img/Instagram.png'>
-	<span> Displaying recent Instagram photos tagged with #{{hashtag}}:</span><br>
-	<li class='instaResultList'>
-		<img class='instaImage' src='{{instaImg.data[i].images.low_resolution.url}}'>
-	</li>
+	<img id='instaIcon' class="center-block" src='img/Instagram.png'>
+	<p class="additionalInfo"> Displaying recent Instagram photos tagged with #{{hashtag}}:</p>
+	<div class='instaResultDiv'>
+		<img ng-repeat="img in instaImg" class='instaImage' src='{{img.images.low_resolution.url}}'>
+	</div>
 </div>
 
 <div class="modal-footer">
