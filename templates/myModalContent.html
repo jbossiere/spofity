@@ -9,12 +9,15 @@
 	<hr>
 	<img id='instaIcon' class="center-block" src='img/Instagram.png'>
 	<p class="additionalInfo"> Displaying recent Instagram photos tagged with #{{hashtag}}:</p>
-	<div class='instaResultDiv'>
-		<img ng-repeat="img in instaImg" class='instaImage' src='{{img.images.low_resolution.url}}'>
+	<div class="container instaDiv">
+		<div ng-repeat="img in instaImg" class=" instaImageDiv col-xs-12 col-sm-6 col-md-4">
+			<img class='instaImage' src='{{img.images.low_resolution.url}}'>
+		</div>
 	</div>
 </div>
 
 <div class="modal-footer">
-	<!--Pause Music-->
+
 	<button class="btn btn-warning" type="button" ng-click="pause()">Pause Music</button>
+	<button class="btn btn-danger" type="button" ng-click="close()">Close</button>
 </div>

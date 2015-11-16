@@ -1,12 +1,5 @@
 $(document).ready(function(){
   $('#filterBar').hide(); // start with filter bars hidden
-  // $('#popup, .overlay').hide(); //start with popup hidden
-
-  // // hide popup if the popup is clicked
-  // $('#popup, .overlay').click(function() {
-  //   $('#popup, .overlay').hide();
-  // });
-
 });
 
 var data;
@@ -81,7 +74,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
       animation: true,
       controller: 'modalCtrl',
       templateUrl: 'templates/myModalContent.html',
-      size: 'md',
+      size: 'lg',
       resolve: {
         currentTrack: function () {
           return currentTrack;
@@ -96,12 +89,11 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
 
 
 // A controller to return the current track info to myModalContent.html
-var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, currentTrack, currentAudio) {
+var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal, $uibModalInstance, currentTrack, currentAudio) {
   $scope.currentTrack = currentTrack;
   var hashtag = $scope.hashtag = currentTrack.name.replace(/\s+/g, "").replace("-", "").replace("'", "").replace(",", "");
   var beginUrl = "https://api.instagram.com/v1/tags/";
   var endUrl = "/media/recent?access_token=11438424.81f9925.4562fc090a894cc695e36976c7c31efa&callback=JSON_CALLBACK";
-  console.log(beginUrl + hashtag + endUrl);
 
   // Get the instagram photos
   $http.jsonp(beginUrl + hashtag + endUrl).success(function(response){
@@ -116,6 +108,11 @@ var modalCtrl = myApp.controller('modalCtrl', function($scope, $http, $uibModal,
       currentAudio.pause();
       return;
     }
+  };
+
+  // function that closes the modal window
+  $scope.close = function () {
+    $uibModalInstance.dismiss('cancel');
   };
 });
 

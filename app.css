@@ -3,7 +3,6 @@ body {
   color: black;
 }
 
-/**/
 #headerImg {
 	width: 400;
 	margin-bottom: 1em;
@@ -67,14 +66,15 @@ div.help-block {
 
 /*positions the album art image in the popup*/
 img.popupAlbum {
-	width: 80%;
-	height: 80%;
+	width: 500px;
+	height: 500px;
 }
 
 /*positions the line in the popup*/
 .modal-body hr {
-	width: 50%;
+	width: 80%;
 	margin-bottom: 8px;
+	fill: gray;
 }
 
 /*positions the instagram icon in the popup*/
@@ -86,8 +86,16 @@ img.popupAlbum {
 
 /*padding and positioning on the image results from instagram*/
 img.instaImage {
-	width: 200px;
+	width: 240px;
 	border: solid 1px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/*padding for each div containing the instagram images*/
+.instaImageDiv {
+	padding-bottom: 10px;
 }
 
 
@@ -96,16 +104,20 @@ img.instaImage {
 	img.popupAlbum {
 		margin-left: auto;
 		margin-right: auto;
-		width: 80%;
-		height: 80%;
+		width: 350px;
+		height: 350px;
 	}
 
 	img.instaImage {
-		width:200px;
+		width:240px;
 	}
 }
 
 /*aligns the additional info in the modal*/
 .additionalInfo {
 	text-align: center;
+}
+
+.instaDiv {
+	width: 100%;
 }
