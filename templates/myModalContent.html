@@ -3,7 +3,7 @@
 	<h3 class="modal-title additionalInfo">{{currentTrack.name}}</h3>
 </div>
 <div class="modal-body center-block">
-	<img class='popupAlbum center-block' src='{{currentTrack.album.images[1].url}}' alt="{{currentTrack.name}}">
+	<img class='popupAlbum center-block' ng-src='{{currentTrack.album.images[1].url}}' alt="{{currentTrack.name}}">
 	<h4 class="additionalInfo">"{{currentTrack.name}}" by {{currentTrack.artists[0].name}}</h4>
 	<h4 class="additionalInfo">from the album <i>{{currentTrack.album.name}}</i></h4>
 	<hr>
@@ -11,7 +11,7 @@
 	<p class="additionalInfo"> Displaying recent Instagram photos tagged with #{{hashtag}}:</p>
 	<div class="container instaDiv">
 		<div ng-repeat="img in instaImg" class=" instaImageDiv col-xs-12 col-sm-6 col-md-4">
-			<img class='instaImage' src='{{img.images.low_resolution.url}}'>
+			<img class='instaImage' ng-src='{{img.images.low_resolution.url}}'>
 		</div>
 	</div>
 </div>
