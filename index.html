@@ -49,7 +49,7 @@
 			</div> <!-- /container -->
 
 			<!-- Song Filter -->
-			<div id="filterBar" class="container-fluid">
+			<div ng-show="artist != undefined" id="filterBar" class="ng-hide container-fluid">
 				<!--Pause Music-->
 				<button class="btn btn-warning fixedBtn" type="button" ng-click="pause()">Pause Music</button>
 				<div class="row">
@@ -98,7 +98,7 @@
 					</div>
 					<div id="selectImages">
 						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); open(track)"> <!--open(track) -->
-							<img uib-tooltip="{{track.name}}" class="image" src="{{track.album.images[1].url}}" alt="{{track.name}}" data-toggle="tooltip">
+							<img uib-tooltip="{{track.name}}" class="image" ng-src="{{track.album.images[1].url}}" alt="{{track.name}}" data-toggle="tooltip">
 						</div>
 					</div>			
 				</div> 

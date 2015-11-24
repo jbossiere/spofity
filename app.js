@@ -1,6 +1,3 @@
-$(document).ready(function(){
-  $('#filterBar').hide(); // start with filter bars hidden
-});
 
 var data;
 var baseUrl = 'https://api.spotify.com/v1/search?type=track&query=artist:'
@@ -15,7 +12,6 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
   $scope.getSongs = function() {
     if ($scope.artist != currentArtist && $scope.track == undefined && $scope.album == undefined) {
       currentArtist = $scope.artist;
-      $('#filterBar').show();
       $http.get(baseUrl + $scope.artist).success(function(response){ 
         data = $scope.tracks = response.tracks.items;  
       });
