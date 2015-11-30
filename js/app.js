@@ -81,6 +81,28 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
       }
     });
   };
+
+// testing out shepherd - potentially delete
+  var shepherd = new Shepherd.Tour({
+    defaults: {
+      showCancelLink: true
+    }
+  });
+
+  shepherd.addStep('welcome', {
+    text: ['This is a test'],
+    attachTo: '#headerImg right',
+    classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
+    buttons: [
+      {
+        text: 'Exit',
+        classes: 'shepherd-button-secondary',
+        action: shepherd.cancel
+      }
+    ]
+  });
+  // end of shepherd test
+
 });
 
 
