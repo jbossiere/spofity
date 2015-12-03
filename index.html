@@ -14,11 +14,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
 
-		<!-- Include Shepard -->
-		<link rel="stylesheet" href="css/shepherd-theme-arrows.css" />
-		<script src="js/tether.min.js"></script>
-		<script src="js/shepherd.min.js"></script>
-		
 		<!-- Read scripts -->
 		<script src="js/app.js"></script>
 		<link href="app.css" type="text/css" rel="stylesheet"/>	
@@ -35,9 +30,15 @@
 		<!-- Initiate app -->
 		<div class="container" ng-app="myApp" ng-controller="myCtrl">
 			<div class="container-fluid">
+				<h3 ng-hide="currentArtist != undefined">Spofity is a mashup of the Spotify API and the Instagram API.</h3>  
+
+				<h4 ng-hide="currentArtist != undefined" id="explanation">Start by searching an artist. Then click to preview the song, and see the most recent images from Instagram that have the hashtag, #trackname.</h4>
+			</div>
+
+			<div class="container-fluid">
 				<div class="row">
 					<!-- Artist Form -->
-					<form class="container col-xs-12 col-md-12" name="artistForm" novalidate>
+					<form class="container col-xs-12 col-md-12" id="artistForm" name="artistForm" novalidate>
 
 						<!-- Artist Search -->
 						<div class="form-group" ng-class="{'has-error':artistForm.searchArt.$error.touched && artistForm.searchArt.$invalid}">
@@ -54,7 +55,7 @@
 			</div> <!-- /container -->
 
 			<!-- Song Filter -->
-			<div ng-show="artist != undefined" id="filterBar" class="ng-hide container-fluid">
+			<div ng-show="currentArtist != undefined" id="filterBar" class="container-fluid">
 				<!--Pause Music-->
 				<button class="btn btn-warning fixedBtn" type="button" ng-click="pause()">Pause Music</button>
 				<div class="row">
@@ -98,10 +99,10 @@
 				<div class="row">
 					<div class="help-block">
 						<span class="playingSpan" ng-show="tracks.length>0">Click for more info and preview:</span>
-						<span class="playingSpan" ng-show="currentSong &&!audioObject.paused">(Currently playing: {{trackName}})</span> <!-- took out currentSong && from ng-show... is it necessary?-->
+						<span class="playingSpan" ng-show="currentSong &&!audioObject.paused">(Currently playing: {{trackName}})</span>
 					</div>
 					<div id="selectImages">
-						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); open(track)"> <!--open(track) -->
+						<div ng-repeat="track in tracks" class="resultDiv" ng-click="play(track.preview_url); open(track)">
 							<img uib-tooltip="{{track.name}}" class="image" ng-src="{{track.album.images[1].url}}" alt="{{track.name}}" data-toggle="tooltip">
 						</div>
 					</div>			

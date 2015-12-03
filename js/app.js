@@ -1,21 +1,22 @@
 
 var data;
 var baseUrl = 'https://api.spotify.com/v1/search?type=track&query=artist:'
-var currentArtist;
 var trackName;
 var myApp = angular.module('myApp', ['ui.bootstrap']);
 
 var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) { 
   $scope.audioObject = {};
+  $scope.currentArtist;
+
 
   // get songs by artist search
   $scope.getSongs = function() {
-    if ($scope.artist != currentArtist && $scope.track == undefined && $scope.album == undefined) {
-      currentArtist = $scope.artist;
+    if ($scope.artist != $scope.currentArtist && $scope.track == undefined && $scope.album == undefined) {
+      $scope.currentArtist = $scope.artist;
       $http.get(baseUrl + $scope.artist).success(function(response){ 
         data = $scope.tracks = response.tracks.items;  
       });
-    } else if ($scope.artist == currentArtist && $scope.track == undefined && $scope.album == undefined) {
+    } else if ($scope.artist == $scope.currentArtist && $scope.track == undefined && $scope.album == undefined) {
         $http.get('https://api.spotify.com/v1/search?type=track&query=artist:' + $scope.artist).success(function(response){ 
           data = $scope.tracks = response.tracks.items;  
         });
@@ -81,28 +82,6 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http, $uibModal) {
       }
     });
   };
-
-// testing out shepherd - potentially delete
-  var shepherd = new Shepherd.Tour({
-    defaults: {
-      showCancelLink: true
-    }
-  });
-
-  shepherd.addStep('welcome', {
-    text: ['This is a test'],
-    attachTo: '#headerImg right',
-    classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
-    buttons: [
-      {
-        text: 'Exit',
-        classes: 'shepherd-button-secondary',
-        action: shepherd.cancel
-      }
-    ]
-  });
-  // end of shepherd test
-
 });
 
 

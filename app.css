@@ -1,6 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+
 body {
   background-color: #C9C9C9; 
   color: black;
+  font-family: 'Arvo', serif;
 }
 
 #headerImg {
@@ -18,13 +21,22 @@ header {
 	min-height: 500px;
 	background-position: center;	
 	background-image: url("img/record-player.jpg");
-	margin-bottom: 50px;
-	background-repeat: no-repeat;
+	background-size: cover;
+/*	margin-bottom: 30px;
+*/	background-repeat: no-repeat;
 }
 
 /*positions the logo*/
 header img {
 	margin-top: 180px;	
+}
+
+/*#explanation {
+	margin-bottom: 30px;
+}*/
+
+#artistForm {
+	margin-top: 30px;
 }
 
 /*changes the color and positions of the span text stating that the user can click a song to preview*/
