@@ -4,9 +4,6 @@ The instructions are described [here](http://faculty.washington.edu/mikefree/inf
 What is the purpose of your project (i.e., why would someone use this app)?
 I created a web app that would let people select an artist, they want to hear and then filter the choices by track name, album name or both.  When the user clicks on an album cover, they get a preview of the track, as well as 10 of the most recent instagram photos that have the artist's name hashtag in common - so for example. clicking on a coldplay song would show instagram images tagged with #coldplay.
 
-What is the URL of this project on your student web-server?
-http://students.washington.edu/jgb93/info343/spotify/
-
 Did you receive help from any other sources (classmates, etc.)? If so, please list who.
 Katrina Ezis
 
