@@ -22,18 +22,13 @@ header {
 	background-position: center;	
 	background-image: url("img/record-player.jpg");
 	background-size: cover;
-/*	margin-bottom: 30px;
-*/	background-repeat: no-repeat;
+	background-repeat: no-repeat;
 }
 
 /*positions the logo*/
 header img {
 	margin-top: 180px;	
 }
-
-/*#explanation {
-	margin-bottom: 30px;
-}*/
 
 #artistForm {
 	margin-top: 30px;
