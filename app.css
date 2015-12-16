@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Arvo);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 body {
   background-color: #C9C9C9; 
   color: black;
-  font-family: 'Arvo', serif;
+  font-family: 'Montserrat', serif;
 }
 
 #headerImg {
